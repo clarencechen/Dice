@@ -1,4 +1,20 @@
-void setup()
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Dice extends PApplet {
+
+public void setup()
 {
 	size(1120,320,P3D);
 	noLoop();
@@ -9,7 +25,7 @@ void setup()
 	textSize(30);
 	textAlign(CENTER);
 }
-void draw()
+public void draw()
 {
 	Die[] bob = new Die[6];
 	background(0);
@@ -28,7 +44,7 @@ void draw()
 	}
 	text("Sum of front faces: "+sum,560,280,0);
 }
-void mousePressed()
+public void mousePressed()
 {
 	redraw();
 }
@@ -45,11 +61,11 @@ class Die //models one single dice cube
 	 this.y = y;
 	 this.z = z;
 	}
-	void roll()
+	public void roll()
 	{
 	numDots = (int)((Math.random()*6)+1);
 	}
-	void show()
+	public void show()
 	{
 		translate(x, y, z);
 		rotateX(-PI/6); 
@@ -62,7 +78,7 @@ class Die //models one single dice cube
 		rotateX(PI/6);
 		translate(-x, -y, -z);
 	}
-	void placeDot(int numDots)
+	public void placeDot(int numDots)
 	{
 		switch (numDots) {
 			case 1 :
@@ -205,48 +221,48 @@ class Die //models one single dice cube
 			}
 		}
 	}
-	void drawOne ()
+	public void drawOne ()
 	{
 		ellipse(0,0,20,20);
 	}
-	void drawTwoR()
+	public void drawTwoR()
 	{
 		ellipse(-20,-20,20,20);
 		ellipse(20,20,20,20);
 	}
-	void drawTwoL()
+	public void drawTwoL()
 	{
 		ellipse(-20,20,20,20);
 		ellipse(20,-20,20,20);
 	}
-	void drawThreeR()
+	public void drawThreeR()
 	{
 		ellipse(-20,-20,20,20);
 		ellipse(0,0,20,20);
 		ellipse(20,20,20,20);
 	}
-	void drawThreeL()
+	public void drawThreeL()
 	{
 		ellipse(-20,20,20,20);
 		ellipse(0,0,20,20);
 		ellipse(20,-20,20,20);
 	}
-	void drawFour()
+	public void drawFour()
 	{
-		ellipse(-20,-20,20,20);
-		ellipse(-20,20,20,20);
-		ellipse(20,-20,20,20);
-		ellipse(20,20,20,20);
-	}
-	void drawFive()
-	{
-		ellipse(0,0,20,20);
 		ellipse(-20,-20,20,20);
 		ellipse(-20,20,20,20);
 		ellipse(20,-20,20,20);
 		ellipse(20,20,20,20);
 	}
-	void drawSix()
+	public void drawFive()
+	{
+		ellipse(0,0,20,20);
+		ellipse(-20,-20,20,20);
+		ellipse(-20,20,20,20);
+		ellipse(20,-20,20,20);
+		ellipse(20,20,20,20);
+	}
+	public void drawSix()
 	{
 		ellipse(-20,0,20,20);
 		ellipse(20,0,20,20);
@@ -255,7 +271,7 @@ class Die //models one single dice cube
 		ellipse(-20,-20,20,20);
 		ellipse(20,-20,20,20);
 	}
-	void drawSixH()
+	public void drawSixH()
 	{
 		ellipse(-20,-20,20,20);
 		ellipse(20,-20,20,20);
@@ -264,4 +280,13 @@ class Die //models one single dice cube
 		ellipse(-20,20,20,20);
 		ellipse(20,20,20,20);
 	}
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Dice" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
